@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import slove from './slover.js';
 
@@ -59,15 +58,15 @@ class App extends Component {
     this.setState({ maze: copystate })
   }
 
-  outputMaze(e){
+  outputMaze(e) {
     let log = "";
     this.state.maze.map((array) => {
       log += "[" + array.toString() + "],"
     })
     console.log(log)
   }
-  sloveMazeinJs(e){
-    console.log(slove(this.state.mapsize,this.state.maze,this.state.goal))
+  sloveMazeinJs(e) {
+    console.log(slove(this.state.mapsize, this.state.maze, this.state.goal))
   }
 
   render() {
