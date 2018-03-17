@@ -18,7 +18,8 @@ class App extends Component {
         [0, 0, 0, 1], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 1, 0, 0],
         [1, 0, 0, 1], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0], [1, 1, 0, 0],
       ],
-      goal: [[7, 7]]
+      goal: [[7, 7]],
+      walkmap: [[]]
     }
   }
 
@@ -66,7 +67,9 @@ class App extends Component {
     console.log(log)
   }
   sloveMazeinJs(e) {
-    console.log(slove(this.state.mapsize, this.state.maze, this.state.goal))
+    const wmap = slove(this.state.mapsize, this.state.maze, this.state.goal)
+    console.log(wmap)
+    this.setState({ walkmap: wmap })
   }
 
   render() {
@@ -82,6 +85,15 @@ class App extends Component {
                   G
               </text>
               )
+            })
+          }
+          {
+            this.state.walkmap.map((array, y) => {
+              array.map((num, x) => {
+                <text x={(x + 0.5) * this.state.size} y={(7 - y + 0.5) * this.state.size} key={"goal-" + x.toString() + " " + y.toString()}>
+                  {num}
+                </text>
+              })
             })
           }
           {
