@@ -59,7 +59,19 @@ class App extends Component {
     }
     this.setState({ maze: copystate })
   }
+  updateGoal(e) {
+    const x = parseInt(e.target.getAttribute("countx"), 10);
+    const y = parseInt(e.target.getAttribute("county"), 10);
+    console.log(x, y);
+    let newgoal = this.state.goal;
+    if (this.state.goal.some((v, i, a) => v[0] == x && v[1] == y)) {
+      newgoal = this.state.goal.filter((v, i, a) => v[0] != x || v[1] != y);
+    } else {
+      newgoal.push([x, y]);
+    }
+    this.setState({ goal: newgoal });
 
+  }
   outputMaze(e) {
     let log = "";
     this.state.maze.map((array) => {
@@ -67,6 +79,7 @@ class App extends Component {
     })
     console.log(log)
   }
+
   sloveMazeinJs(e) {
     const wmap = slove(this.state.mapsize, this.state.maze, this.state.goal)
     console.log(wmap)
@@ -75,21 +88,39 @@ class App extends Component {
 
   render() {
     let x = -1, y = 1;
+    const items = [];
+    const fillsize = this.state.size * 0.9;
+    for (let y = 0; y < this.state.mapsize[1]; y++) {
+      for (let x = 0; x < this.state.mapsize[0]; x++) {
+        items.push(<rect
+          x={(x + 0.05) * this.state.size} y={(7 - y + 0.05) * this.state.size} width={fillsize} height={fillsize}
+          onDoubleClick={this.updateGoal.bind(this)}
+          countx={x} county={y}
+          fill="white" fillOpacity="1"
+          key={"map-white-" + x.toString() + "-" + y.toString()} />)
+      }
+    }
     return (
       <div className="App">
-        <p>{"Mouse Simulator"}</p>
-        <svg version="1.1" width="800" height="800" xmlns="http://www.w3.org/2000/svg">
+        <p className="App-title">{"Mouse Simulator"}</p>
+        <svg version="1.1" width={this.state.size * this.state.mapsize[0] + 10} height={this.state.size * this.state.mapsize[1] + 10} xmlns="http://www.w3.org/2000/svg">
+          {items}
           {
             this.state.goal.map((pos) => {
               return (
-                <rect x={(pos[0] + 0.05) * this.state.size} y={(7 - pos[1] + 0.05) * this.state.size} width={(this.state.size * 0.9).toString()} height={(this.state.size * 0.9).toString()} fill="red" fill-opacity="0.5" key={"goal-" + pos[0].toString() + " " + pos[1].toString()} />
+                <rect x={(pos[0] + 0.05) * this.state.size} y={(7 - pos[1] + 0.05) * this.state.size} width={fillsize} height={fillsize}
+                  fill="red" fillOpacity="0.5" key={"goal-" + pos[0].toString() + " " + pos[1].toString()}
+                  countx={pos[0]} county={pos[1]}
+                  onDoubleClick={this.updateGoal.bind(this)} />
               )
             })
           }
           {
             this.state.start.map((pos) => {
               return (
-                <rect x={(pos[0] + 0.05) * this.state.size} y={(7 - pos[1] + 0.05) * this.state.size} width={(this.state.size * 0.9).toString()} height={(this.state.size * 0.9).toString()} fill="blue" fill-opacity="0.5" key={"start-" + pos[0].toString() + " " + pos[1].toString()} />
+                <rect x={(pos[0] + 0.05) * this.state.size} y={(7 - pos[1] + 0.05) * this.state.size} width={fillsize} height={fillsize}
+                  fill="blue" fillOpacity="0.5" key={"start-" + pos[0].toString() + " " + pos[1].toString()}
+                  countx={pos[0]} county={pos[1]} />
               )
             })
           }
@@ -135,9 +166,11 @@ class App extends Component {
             })
           }
         </svg>
-        <button onClick={this.sloveMazeinJs.bind(this)}>{"Slove (JS)"}</button>
-        <button>{"Slove (Rust)"}</button>
-        <button onClick={this.outputMaze.bind(this)}>{"Output Maze"}</button>
+        <div>
+          <button onClick={this.sloveMazeinJs.bind(this)} className="pure-button">{"Slove (JS)"}</button>
+          <button className="pure-button" disabled>{"Slove (Rust)"}</button>
+          <button onClick={this.outputMaze.bind(this)} className="pure-button">{"Output Maze"}</button>
+        </div>
       </div>
     );
   }
