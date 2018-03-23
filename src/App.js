@@ -19,6 +19,7 @@ class App extends Component {
         [1, 0, 0, 1], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0], [1, 1, 0, 0],
       ],
       goal: [[7, 7]],
+      start: [[0, 0]],
       walkmap: [[]]
     }
   }
@@ -81,19 +82,28 @@ class App extends Component {
           {
             this.state.goal.map((pos) => {
               return (
-                <text x={(pos[0] + 0.5) * this.state.size} y={(7 - pos[1] + 0.5) * this.state.size} key={"goal-" + pos[0].toString() + " " + pos[1].toString()}>
-                  G
-              </text>
+                <rect x={(pos[0] + 0.05) * this.state.size} y={(7 - pos[1] + 0.05) * this.state.size} width={(this.state.size * 0.9).toString()} height={(this.state.size * 0.9).toString()} fill="red" fill-opacity="0.5" key={"goal-" + pos[0].toString() + " " + pos[1].toString()} />
+              )
+            })
+          }
+          {
+            this.state.start.map((pos) => {
+              return (
+                <rect x={(pos[0] + 0.05) * this.state.size} y={(7 - pos[1] + 0.05) * this.state.size} width={(this.state.size * 0.9).toString()} height={(this.state.size * 0.9).toString()} fill="blue" fill-opacity="0.5" key={"start-" + pos[0].toString() + " " + pos[1].toString()} />
               )
             })
           }
           {
             this.state.walkmap.map((array, y) => {
-              array.map((num, x) => {
-                <text x={(x + 0.5) * this.state.size} y={(7 - y + 0.5) * this.state.size} key={"goal-" + x.toString() + " " + y.toString()}>
-                  {num}
-                </text>
-              })
+              return (
+                array.map((num, x) => {
+                  return (
+                    <text x={(x + 0.5) * this.state.size} y={(7 - y + 0.5) * this.state.size} key={"goal-" + x.toString() + "-" + y.toString()}>
+                      {num}
+                    </text>
+                  );
+                })
+              )
             })
           }
           {
