@@ -1,0 +1,5 @@
+language: node_js
+node_js: 9.8.0
+sudo: false
+after_success:
+- '[ "$TRAVIS_BRANCH" == "master" ] && npm run deply'
