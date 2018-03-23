@@ -2,7 +2,7 @@ const ghpages = require("gh-pages");
 const path = require("path");
 
 const GH_TOKEN = process.env.GH_TOKEN;
-const repo = "@github.com:sh4869/MouseSimulatorOnWeb.git"
+const repo = "@github.com/sh4869/MouseSimulatorOnWeb.git"
 ghpages.publish(
     path.join(__dirname, '..', 'build'),
     {
