@@ -1,5 +1,5 @@
 function Queue() {
-    this.__a = new Array();
+    this.__a = [];
 }
 
 Queue.prototype.enqueue = function (o) {
@@ -13,7 +13,7 @@ Queue.prototype.dequeue = function () {
     return null;
 }
 Queue.prototype.empty = function () {
-    return this.__a.length == 0;
+    return this.__a.length === 0;
 }
 
 Queue.prototype.size = function () {
@@ -40,22 +40,22 @@ const slove = (mapsize, maze, goals) => {
         const number = cpos[0] + cpos[1] * mapsize[1];
         // console.log(number,cpos)
         // Top
-        if (maze[number][0] == 0 && cpos[1] + 1 < mapsize[1] && wmap[cpos[1] + 1][cpos[0]] === 255) {
+        if (maze[number][0] === 0 && cpos[1] + 1 < mapsize[1] && wmap[cpos[1] + 1][cpos[0]] === 255) {
             wmap[cpos[1] + 1][cpos[0]] = count + 1;
             q.enqueue([cpos[0], cpos[1] + 1])
         }
         // Right
-        if (maze[number][1] == 0 && cpos[0] + 1 < mapsize[0] && wmap[cpos[1]][cpos[0] + 1] === 255) {
+        if (maze[number][1] === 0 && cpos[0] + 1 < mapsize[0] && wmap[cpos[1]][cpos[0] + 1] === 255) {
             wmap[cpos[1]][cpos[0] + 1] = count + 1;
             q.enqueue([cpos[0] + 1, cpos[1]])
         }
         // Bottom
-        if (maze[number][2] == 0 && cpos[1] - 1 > -1 && wmap[cpos[1] - 1][cpos[0]] === 255) {
+        if (maze[number][2] === 0 && cpos[1] - 1 > -1 && wmap[cpos[1] - 1][cpos[0]] === 255) {
             wmap[cpos[1] - 1][cpos[0]] = count + 1;
             q.enqueue([cpos[0], cpos[1] - 1])
         }
         // Left
-        if (maze[number][3] == 0 && cpos[0] - 1 > -1 && wmap[cpos[1]][cpos[0] - 1] === 255) {
+        if (maze[number][3] === 0 && cpos[0] - 1 > -1 && wmap[cpos[1]][cpos[0] - 1] === 255) {
             wmap[cpos[1]][cpos[0] - 1] = count + 1;
             q.enqueue([cpos[0] - 1, cpos[1]])
         }

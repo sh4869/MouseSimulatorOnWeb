@@ -64,8 +64,8 @@ class App extends Component {
     const y = parseInt(e.target.getAttribute("county"), 10);
     console.log(x, y);
     let newgoal = this.state.goal;
-    if (this.state.goal.some((v, i, a) => v[0] == x && v[1] == y)) {
-      newgoal = this.state.goal.filter((v, i, a) => v[0] != x || v[1] != y);
+    if (this.state.goal.some((v, i, a) => v[0] === x && v[1] === y)) {
+      newgoal = this.state.goal.filter((v, i, a) => v[0] !== x || v[1] !== y);
     } else {
       newgoal.push([x, y]);
     }
@@ -74,7 +74,7 @@ class App extends Component {
   }
   outputMaze(e) {
     let log = "";
-    this.state.maze.map((array) => {
+    this.state.maze.forEach((array) => {
       log += "[" + array.toString() + "],"
     })
     console.log(log)
@@ -160,6 +160,7 @@ class App extends Component {
                     case 3:
                       return <line x1={(x * this.state.size)} x2={(x * this.state.size)} y1={((8 - y) * this.state.size)} y2={((8 - y) * this.state.size + this.state.size)} stroke={element === 1 ? "black" : "#eee"} onClick={(e) => this.onClick(e)} key={x.toString() + " " + y.toString() + i.toString()} />
                     default:
+                      return (<div/>);
                   }
                 })}
               </g>
