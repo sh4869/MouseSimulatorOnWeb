@@ -167,8 +167,8 @@ class App extends Component {
           }
         </svg>
         <div>
-          <button onClick={this.sloveMazeinJs.bind(this)} className="pure-button">{"Slove (JS)"}</button>
-          <button className="pure-button" disabled>{"Slove (Rust)"}</button>
+          <button onClick={this.sloveMazeinJs.bind(this)} className="pure-button">{"Solve (JS)"}</button>
+          <button className="pure-button" disabled>{"Solve (Rust)"}</button>
           <button onClick={this.outputMaze.bind(this)} className="pure-button">{"Output Maze"}</button>
         </div>
       </div>
