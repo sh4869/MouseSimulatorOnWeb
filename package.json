@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "webpack",
-    "start":"webpack-dev-server"
+    "start":"webpack-dev-server",
+    "deploy":"npm run build && node .travis/deploy.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.51",
