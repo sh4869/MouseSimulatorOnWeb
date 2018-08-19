@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import slove from './slover.js';
 
 class App extends Component {
